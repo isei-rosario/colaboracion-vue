@@ -10,7 +10,8 @@
 <body>
     <div id="app">
         <h1>{{titulo}}</h1>
-        <button v-on:click="consultarPost">Consultar post</button>
+        <button v-if="posts.length==0" v-on:click="consultarPost">Consultar post</button>
+        <button v-if="posts.length>0" v-on:click="limpiarPost">Limpiar posts</button>
         <hr>
         <div v-for="p in posts">
             <h1>{{p.title}}</h1>
@@ -33,7 +34,10 @@
                     this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function (respuesta) {
                         this.posts = respuesta.body;
                     })
-                }
+                },
+                limpiarPost: function () {
+                        this.posts = [];
+                    }
             }
         })
     </script>

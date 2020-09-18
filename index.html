@@ -11,6 +11,12 @@
     <div id="app">
         <h1>{{titulo}}</h1>
         <button v-on:click="consultarPost">Consultar post</button>
+        <hr>
+        <div v-for="p in posts">
+            <h1>{{p.title}}</h1>
+            {{p.body}}
+            <hr>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -19,12 +25,13 @@
         var app = new Vue({
             el: '#app',
             data: {
-                titulo: 'Consulta de posts'
+                titulo: 'Consulta de posts',
+                posts: []
             },
             methods: {
                 consultarPost: function () {
                     this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function (respuesta) {
-                        console.log(respuesta.body);
+                        this.posts = respuesta.body;
                     })
                 }
             }

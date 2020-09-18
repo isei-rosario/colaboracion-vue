@@ -23,7 +23,9 @@
             },
             methods: {
                 consultarPost: function () {
-                    alert('Hola');
+                    this.$http.get('https://jsonplaceholder.typicode.com/posts').then(function (respuesta) {
+                        console.log(respuesta.body);
+                    })
                 }
             }
         })
